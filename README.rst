@@ -1,5 +1,5 @@
 ================
-JsonStreamReader
+Json Stream Reader
 ================
 
 
@@ -30,7 +30,8 @@ Given a byte stream of {}-bracketed objects, generate one object-string at a tim
 Features
 --------
 
-* TODO
+* Turns a stream of unseperated {}-bracketed character (byte) strings, such as
+  JSON serialized objects, into a collection of individual (byte)strings.
 
 Credits
 -------
