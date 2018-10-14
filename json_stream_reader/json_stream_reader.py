@@ -8,9 +8,9 @@ Roadmap:
       slowing down the parser.
 
 """
-from typing import Generator, IO
 
-def reader(stream: IO[bytes], chunk_size=1000) -> Generator:
+
+def reader(stream: 'IO[bytes]', chunk_size=1000) -> 'Generator':
     """
     >>> import io
     >>> stream = io.BytesIO()
