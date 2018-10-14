@@ -9,8 +9,10 @@ Roadmap:
 
 """
 
+from typing import Generator, IO
 
-def reader(stream: 'IO[bytes]', chunk_size=1000) -> 'Generator':
+
+def reader(stream: IO[bytes], chunk_size=1000) -> Generator:
     """
     >>> import io
     >>> stream = io.BytesIO()
@@ -20,13 +22,15 @@ def reader(stream: 'IO[bytes]', chunk_size=1000) -> 'Generator':
     0
     >>> items = reader(stream)
     >>> import json
-    >>> [json.loads(x.decode()) for x in items] == [{"value":1}, {"value":2}, {"value":3}]
+    >>> [json.loads(x.decode()) for x in items] == [{"value":1}, {"value":2},
+    ...   {"value":3}]
     True
     >>> stream.seek(0)
     0
     >>> items = reader(stream, 1)
     >>> import json
-    >>> [json.loads(x.decode()) for x in items] == [{"value":1}, {"value":2}, {"value":3}]
+    >>> [json.loads(x.decode()) for x in items] == [{"value":1}, {"value":2},
+    ...   {"value":3}]
     True
     """
     size_to_read = chunk_size
@@ -44,7 +48,8 @@ def reader(stream: 'IO[bytes]', chunk_size=1000) -> 'Generator':
                 if more:
                     # Subtract 1 because we may need to catch the trailing }
                     # again.
-                    begin += len(buffer) - 1 if begin is 0 else (size_to_read - 1)
+                    begin += len(buffer) - 1 if begin is 0 else (
+                            size_to_read - 1)
                     buffer += more
                 elif buffer.endswith(b'}'):
                     yield buffer
